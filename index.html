@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apertura Instagram...</title>
   <script>
-    const scriptUrl = "https://script.google.com/macros/s/AKfycbzvCClemaJ3MXfe7aFbEV9cqoa2ALZhKlS-hKSFniJLGvvjF1peb_WS0WtlC22n7EHo0A/exec";
+    // CONTATORE (più stabile con Image)
+    var img = new Image();
+    img.src = "https://api.countapi.xyz/hit/leonardogriguolo/instagram_nfc";
 
-    fetch(scriptUrl + "?src=github_nfc", {
-      method: "GET",
-      mode: "no-cors"
-    }).catch(() => {});
+    // PROVA AD APRIRE APP INSTAGRAM
+    window.location.href = "instagram://user?username=leonardogriguolo";
 
-    setTimeout(function () {
-      window.location.href = "instagram://user?username=leonardogriguolo";
-    }, 200);
-
-    setTimeout(function () {
+    // FALLBACK WEB
+    setTimeout(function() {
       window.location.href = "https://instagram.com/leonardogriguolo";
-    }, 1200);
+    }, 900);
   </script>
 </head>
-<body>
-  Apertura Instagram...
-</body>
+<body></body>
 </html>
