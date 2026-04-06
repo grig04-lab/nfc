@@ -3,28 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instagram Redirect</title>
+  <title>Instagram NFC</title>
 </head>
 <body>
   <script>
-    // crea/incrementa il contatore
+    // 1️⃣ CONTATORE (crea + incrementa)
     var img = new Image();
     img.src = "https://countapi.mileshilliard.com/api/v1/hit/leonardogriguolo_instagram_nfc?nocache=" + Date.now();
 
-    // aspetta mezzo secondo così il conteggio parte prima del redirect
-    setTimeout(function () {
-      var ua = navigator.userAgent || navigator.vendor || window.opera;
+    // 2️⃣ RILEVA DEVICE
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
 
+    // 3️⃣ DOPO UN ATTIMO APRI APP
+    setTimeout(function () {
+
+      // ANDROID → più stabile
       if (/android/i.test(ua)) {
         window.location.href = "intent://www.instagram.com/leonardogriguolo/#Intent;package=com.instagram.android;scheme=https;end";
-      } else {
+      } 
+      // IPHONE
+      else {
         window.location.href = "instagram://user?username=leonardogriguolo";
       }
 
-      // fallback web
+      // 4️⃣ FALLBACK WEB (se app non si apre)
       setTimeout(function () {
         window.location.href = "https://www.instagram.com/leonardogriguolo/";
       }, 1200);
+
     }, 500);
   </script>
 </body>
