@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-  <script>
-    // CONTATORE (più stabile con Image)
-    var img = new Image();
-    img.src = "https://api.countapi.xyz/hit/leonardogriguolo/instagram_nfc";
-
-    // PROVA AD APRIRE APP INSTAGRAM
-    window.location.href = "instagram://user?username=leonardogriguolo";
-
-    // FALLBACK WEB
-    setTimeout(function() {
-      window.location.href = "https://instagram.com/leonardogriguolo";
-    }, 900);
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Redirect</title>
 </head>
-<body></body>
+<body>
+  <script>
+    // 1) Contatore: CountAPI incrementa con /hit/namespace/key
+    var img = new Image();
+    img.src = "https://api.countapi.xyz/hit/leonardogriguolo/instagram_nfc?nocache=" + Date.now();
+
+    // 2) Aspetta un attimo per far partire il conteggio
+    setTimeout(function () {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+
+      // Android
+      if (/android/i.test(ua)) {
+        window.location.href = "intent://www.instagram.com/leonardogriguolo/#Intent;package=com.instagram.android;scheme=https;end";
+      } 
+      // iPhone / iPad
+      else {
+        window.location.href = "instagram://user?username=leonardogriguolo";
+      }
+
+      // 3) Fallback web
+      setTimeout(function () {
+        window.location.href = "https://www.instagram.com/leonardogriguolo/";
+      }, 1200);
+
+    }, 500);
+  </script>
+</body>
 </html>
