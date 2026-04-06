@@ -2,11 +2,16 @@
 <html>
 <head>
   <script>
-    // INVIO EVENTO (conteggio)
-    fetch("https://api.countapi.xyz/hit/leonardogriguolo/nfc");
+    // TRACKING
+    fetch("https://api.countapi.xyz/hit/leonardogriguolo/instagram_nfc");
 
-    // REDIRECT A INSTAGRAM
-    window.location.href = "https://instagram.com/leonardogriguolo";
+    // PROVA AD APRIRE APP INSTAGRAM
+    window.location.href = "instagram://user?username=leonardogriguolo";
+
+    // FALLBACK DOPO 1 SECONDO
+    setTimeout(function() {
+      window.location.href = "https://instagram.com/leonardogriguolo";
+    }, 1000);
   </script>
 </head>
 <body></body>
