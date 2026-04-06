@@ -7,28 +7,24 @@
 </head>
 <body>
   <script>
-    // 1) Contatore: CountAPI incrementa con /hit/namespace/key
+    // crea/incrementa il contatore
     var img = new Image();
-    img.src = "https://api.countapi.xyz/hit/leonardogriguolo/instagram_nfc?nocache=" + Date.now();
+    img.src = "https://countapi.mileshilliard.com/api/v1/hit/leonardogriguolo_instagram_nfc?nocache=" + Date.now();
 
-    // 2) Aspetta un attimo per far partire il conteggio
+    // aspetta mezzo secondo così il conteggio parte prima del redirect
     setTimeout(function () {
       var ua = navigator.userAgent || navigator.vendor || window.opera;
 
-      // Android
       if (/android/i.test(ua)) {
         window.location.href = "intent://www.instagram.com/leonardogriguolo/#Intent;package=com.instagram.android;scheme=https;end";
-      } 
-      // iPhone / iPad
-      else {
+      } else {
         window.location.href = "instagram://user?username=leonardogriguolo";
       }
 
-      // 3) Fallback web
+      // fallback web
       setTimeout(function () {
         window.location.href = "https://www.instagram.com/leonardogriguolo/";
       }, 1200);
-
     }, 500);
   </script>
 </body>
