@@ -1,70 +1,30 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Apri Instagram</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 40px 20px;
-      background: #f7f7f7;
-    }
-    .box {
-      max-width: 420px;
-      margin: 60px auto;
-      background: white;
-      padding: 24px;
-      border-radius: 14px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-    }
-    h1 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-    p {
-      color: #555;
-      line-height: 1.5;
-    }
-    a {
-      display: inline-block;
-      margin-top: 16px;
-      color: #fff;
-      background: #E1306C;
-      text-decoration: none;
-      padding: 12px 18px;
-      border-radius: 10px;
-    }
-  </style>
 </head>
 <body>
-  <div class="box">
-    <h1>Sto aprendo Instagram...</h1>
-    <p>Se non si apre automaticamente, premi il pulsante qui sotto.</p>
-    <a id="manualLink" href="#">Apri profilo Instagram</a>
-  </div>
-
   <script>
-    const trackingUrl = "https://script.google.com/macros/s/AKfycbye17Sj9OxX8hVD7yEfP9W7eL2u_HxAhFJSRPVoFVkfztzesX0XlgE_NxNGXA0NlIlD/exec";
+    const trackingUrl = "https://script.google.com/macros/s/AKfycby2AO6ogQsN4D2orD8TwCKVxIzW8PbMntR0iNcmsol7YUlkqfa6W1WWfsan8fws--AKAg/exec?src=nfc&ua=" + encodeURIComponent(navigator.userAgent);
     const instagramAppUrl = "instagram://user?username=leonardogriguolo";
-    const instagramWebUrl = "https://www.instagram.com/leonardogriguolo/";
+    const instagramWebUrl = "https://instagram.com/leonardogriguolo";
 
-    document.getElementById("manualLink").href = instagramWebUrl;
-
-    // conteggio scansione
+    // manda il conteggio al Google Sheet tramite Apps Script
     fetch(trackingUrl, {
       method: "GET",
-      mode: "no-cors"
+      mode: "no-cors",
+      cache: "no-store"
     }).catch(() => {});
 
-    // prova apertura app
+    // prova ad aprire l'app Instagram
     window.location.href = instagramAppUrl;
 
-    // fallback web
-    setTimeout(() => {
+    // fallback al profilo web se l'app non si apre
+    setTimeout(function () {
       window.location.href = instagramWebUrl;
-    }, 900);
+    }, 1200);
   </script>
 </body>
 </html>
