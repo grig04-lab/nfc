@@ -3,35 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instagram NFC</title>
+  <title>Apri Instagram</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+      background: #f7f7f7;
+    }
+    .box {
+      max-width: 420px;
+      margin: 60px auto;
+      background: white;
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #555;
+      line-height: 1.5;
+    }
+    a {
+      display: inline-block;
+      margin-top: 16px;
+      color: #fff;
+      background: #E1306C;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
+  <div class="box">
+    <h1>Sto aprendo Instagram...</h1>
+    <p>Se non si apre automaticamente, premi il pulsante qui sotto.</p>
+    <a id="manualLink" href="#">Apri profilo Instagram</a>
+  </div>
+
   <script>
-    // 1️⃣ CONTATORE (crea + incrementa)
-    var img = new Image();
-    img.src = "https://docs.google.com/spreadsheets/d/1XQuJV5Ft2CoW_NirZnMKC2aRk98-ooMxlpJmx5sai6s/edit?gid=0#gid=0" + Date.now();
+    const trackingUrl = "https://docs.google.com/spreadsheets/d/1XQuJV5Ft2CoW_NirZnMKC2aRk98-ooMxlpJmx5sai6s/edit?gid=0#gid=0";
+    const instagramAppUrl = "instagram://user?username=leonardogriguolo";
+    const instagramWebUrl = "https://www.instagram.com/leonardogriguolo/";
 
-    // 2️⃣ RILEVA DEVICE
-    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    document.getElementById("manualLink").href = instagramWebUrl;
 
-    // 3️⃣ DOPO UN ATTIMO APRI APP
-    setTimeout(function () {
+    // conteggio scansione
+    fetch(trackingUrl, {
+      method: "GET",
+      mode: "no-cors"
+    }).catch(() => {});
 
-      // ANDROID → più stabile
-      if (/android/i.test(ua)) {
-        window.location.href = "intent://www.instagram.com/leonardogriguolo/#Intent;package=com.instagram.android;scheme=https;end";
-      } 
-      // IPHONE
-      else {
-        window.location.href = "instagram://user?username=leonardogriguolo";
-      }
+    // prova apertura app
+    window.location.href = instagramAppUrl;
 
-      // 4️⃣ FALLBACK WEB (se app non si apre)
-      setTimeout(function () {
-        window.location.href = "https://www.instagram.com/leonardogriguolo/";
-      }, 1200);
-
-    }, 500);
+    // fallback web
+    setTimeout(() => {
+      window.location.href = instagramWebUrl;
+    }, 900);
   </script>
 </body>
 </html>
